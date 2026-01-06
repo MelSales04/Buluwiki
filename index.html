@@ -32,10 +32,10 @@
     .type-label { display: flex; justify-content: center; align-items: center; gap: 8px; font-weight: bold; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
     .type-label img { width: 24px; height: 24px; }
 
-    .evolution-line { display: flex; align-items: center; justify-content: space-around; gap: 5px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid #ffffff05; }
+    .evolution-line { display: flex; align-items: center; justify-content: space-around; gap: 5px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid #ffffff05; flex-wrap: wrap; }
     
-    .evo-stage { display: flex; flex-direction: column; align-items: center; width: 110px; }
-    .evo-stage img { width: 85px; height: 85px; object-fit: contain; margin-bottom: 10px; }
+    .evo-stage { display: flex; flex-direction: column; align-items: center; width: 100px; margin: 10px 0; }
+    .evo-stage img { width: 80px; height: 80px; object-fit: contain; margin-bottom: 10px; }
     .evo-stage span { font-size: 0.75rem; color: var(--text-blue); font-weight: bold; min-height: 35px; line-height: 1.2; }
 
     .arrow { color: var(--primary); font-weight: bold; font-size: 1.5rem; opacity: 0.5; }
@@ -202,11 +202,15 @@
     </div>
 
     <div class="monster-card" data-anniversary="01" data-unknown="true">
-      <div class="type-label">Descartados</div>
-      <div class="evolution-line">
-        <div class="evo-stage"><img src="imagens/monstros/comum/unknown_01c_th_01.webp" /><span>Unknown 01c (Common)</span></div>
-        <div class="evo-stage"><img src="imagens/monstros/comum/unknown_02a_th_01.webp" /><span>Unknown 02a (Common)</span></div>
+      <div class="type-label" style="color:#ff4444">Descartados / Unknown</div>
+      <div class="evolution-line" style="justify-content: center; gap: 15px;">
+        <div class="evo-stage"><img src="imagens/monstros/comum/unknown_01c_th_01.webp" /><span>Unknown 01c</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/comum/unknown_02a_th_01.webp" /><span>Unknown 02a</span></div>
         <div class="evo-stage"><img src="imagens/monstros/eletrico/unknown_01a_th_01.webp" /><span>Unknown 01a (Lightning)</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/agua/unknown_th_01.webp" /><span>Unknown Water</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/fogo/unknown_th_01.webp" /><span>Unknown Fire</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/gelo/unknown_th_01.webp" /><span>Unknown Ice</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/dragao/unknown_th_01.webp" /><span>Unknown Dragon</span></div>
       </div>
     </div>
 
@@ -215,19 +219,16 @@
 
 <footer>
   Bulu Monster News & Buluwiki © 2026<br>
-  Desenvolvido com foco na preservação da história do jogo.
+  Preservando todos os monstros, inclusive os esquecidos.
 </footer>
 
 <script>
-  // Filtro Principal
   function filterAniv(value) {
     document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
     event.currentTarget.classList.add('active');
-
     const cards = document.querySelectorAll('.monster-card');
     const banner = document.getElementById('banner');
 
-    // Lógica de Banner
     if (value !== 'all' && value !== 'unknown') {
       banner.src = `imagens/${value}th-anniversary.jpg`;
       banner.style.display = "block";
@@ -238,19 +239,13 @@
       banner.style.display = "block";
     }
 
-    // Lógica de Grid
     cards.forEach(card => {
-      if (value === 'all') {
-        card.style.display = 'block';
-      } else if (value === 'unknown') {
-        card.style.display = (card.dataset.unknown === 'true') ? 'block' : 'none';
-      } else {
-        card.style.display = (card.dataset.anniversary === value && card.dataset.unknown === 'false') ? 'block' : 'none';
-      }
+      if (value === 'all') card.style.display = 'block';
+      else if (value === 'unknown') card.style.display = (card.dataset.unknown === 'true') ? 'block' : 'none';
+      else card.style.display = (card.dataset.anniversary === value && card.dataset.unknown === 'false') ? 'block' : 'none';
     });
   }
 
-  // Troca de Versão (Imagens e Nomes)
   function trocarVersao(imgIds, files, nameIds, names) {
     imgIds.forEach((id, i) => {
       document.getElementById(id).src = `imagens/monstros/spirit/` + files[i];
