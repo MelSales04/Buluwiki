@@ -2,114 +2,154 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Buluwiki - 1º Aniversário</title>
+    <title>Buluwiki - Galeria Completa 1º Aniversário</title>
     <style>
-        body {
-            /* Fundo escuro com efeito de brilho/estrelas */
-            background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0a 100%);
-            color: white;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            margin: 0;
-            padding: 20px;
+        body { background-color: #0a0a0a; color: white; font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .logo { max-width: 250px; margin-bottom: 20px; }
+        .banner { width: 100%; border-radius: 10px; border: 1px solid #333; margin-bottom: 30px; }
+        
+        .secao-tipo {
+            display: flex; align-items: center; background: #1a1a1a;
+            padding: 10px 20px; margin-top: 40px; border-left: 5px solid #00d4ff;
         }
+        .icon-tipo { width: 35px; height: 35px; margin-right: 15px; }
+        
+        .grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; padding: 20px 0; }
+        
+        .card { background: #222; border: 1px solid #444; border-radius: 10px; padding: 12px; transition: 0.3s; height: auto; }
+        .card:hover { border-color: #00d4ff; }
+        .monstro-foto { width: 100%; height: auto; border-radius: 5px; margin-bottom: 10px; min-height: 100px; }
+        
+        .controles { display: flex; justify-content: center; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; }
+        .btn-v { background: #444; border: none; color: white; font-size: 9px; padding: 4px 6px; cursor: pointer; border-radius: 3px; }
+        .btn-v:hover { background: #00d4ff; color: black; }
 
-        .container { max-width: 1000px; margin: 0 auto; }
+        .info { display: flex; align-items: center; justify-content: center; gap: 5px; }
+        .tipo-selo { width: 18px; height: 18px; }
+        .nome { font-size: 0.85em; color: #00d4ff; font-weight: bold; }
+    </style>
+</head>
+<body>
 
-        /* Logo Bulu Monster */
-        .header { text-align: center; padding: 20px 0; }
-        .logo { max-width: 250px; filter: drop-shadow(0 0 8px #00d4ff); }
+<div class="container">
+    <img src="imagens/icon/asset/bulu_monster_logo.png" class="logo">
+    <img src="imagens/01th-anniversary.jpg" class="banner">
 
-        /* Banner Principal */
-        .banner-container { text-align: center; margin: 20px 0; }
-        .banner { width: 100%; border-radius: 12px; border: 2px solid #333; }
+    <div class="secao-tipo"><img src="imagens/icon/asset/water_type_icon.png" class="icon-tipo"><h2>ÁGUA</h2></div>
+    <div class="grade">
+        <div class="card"><img src="imagens/monstros/agua/waterfishy_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/water_type_icon.png" class="tipo-selo"><span class="nome">Waterfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/agua/oceanfishy_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/water_type_icon.png" class="tipo-selo"><span class="nome">Oceanfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/agua/abyssfishy_03_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/water_type_icon.png" class="tipo-selo"><span class="nome">Abyssfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/agua/unknown_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/water_type_icon.png" class="tipo-selo"><span class="nome">Unknown</span></div></div>
+    </div>
 
-        /* Seção de Tipo */
-        .tipo-titulo {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 50px;
-            margin-top: 40px;
-            border: 1px solid #444;
-        }
-        .icon-tipo-titulo { width: 30px; height: 30px; margin-right: 15px; }
+    <div class="secao-tipo"><img src="imagens/icon/asset/common_type_icon.png" class="icon-tipo"><h2>COMUM</h2></div>
+    <div class="grade">
+        <div class="card"><img src="imagens/monstros/comum/fishy_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/common_type_icon.png" class="tipo-selo"><span class="nome">Fishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/comum/ordinfishy_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/common_type_icon.png" class="tipo-selo"><span class="nome">Ordinfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/comum/mystfishy_03_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/common_type_icon.png" class="tipo-selo"><span class="nome">Mystfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/comum/unknown_01c_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/common_type_icon.png" class="tipo-selo"><span class="nome">Unknown 01c</span></div></div>
+        <div class="card"><img src="imagens/monstros/comum/unknown_02a_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/common_type_icon.png" class="tipo-selo"><span class="nome">Unknown 02a</span></div></div>
+    </div>
 
-        /* Grade de Monstros */
-        .grade {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
-            padding: 20px 0;
-        }
+    <div class="secao-tipo"><img src="imagens/icon/asset/dragon_type_icon.png" class="icon-tipo"><h2>DRAGÃO</h2></div>
+    <div class="grade">
+        <div class="card"><img src="imagens/monstros/dragao/wyfishy_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/dragon_type_icon.png" class="tipo-selo"><span class="nome">Wyfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/dragao/dritfishy_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/dragon_type_icon.png" class="tipo-selo"><span class="nome">Dritfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/dragao/dragkfishy_03_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/dragon_type_icon.png" class="tipo-selo"><span class="nome">Dragkfishy</span></div></div>
+    </div>
 
-        /* Card do Monstro */
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid #333;
-            border-radius: 15px;
-            padding: 15px;
-            text-align: center;
-            transition: 0.3s;
-            position: relative;
-        }
-        .card:hover { border-color: #00d4ff; transform: translateY(-5px); }
-        .card img.monstro-img { width: 100%; height: auto; }
+    <div class="secao-tipo"><img src="imagens/icon/asset/lightning_type_icon.png" class="icon-tipo"><h2>ELÉTRICO</h2></div>
+    <div class="grade">
+        <div class="card"><img src="imagens/monstros/eletrico/elecfishy_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/lightning_type_icon.png" class="tipo-selo"><span class="nome">Elecfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/eletrico/lightfishy_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/lightning_type_icon.png" class="tipo-selo"><span class="nome">Lightfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/eletrico/thunderfishy_03_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/lightning_type_icon.png" class="tipo-selo"><span class="nome">Thunderfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/eletrico/unknown_01a_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/lightning_type_icon.png" class="tipo-selo"><span class="nome">Unknown 01a</span></div></div>
+    </div>
 
-        /* Ícone de Tipo embaixador do monstro */
-        .tipo-rodapé {
-            exibir: flexível;
-            alinhar itens: centro;
-            justificar-conteúdo: centro;
-            lacuna: 8px;
-            Margem superior: 10px;
-        }
-        .ícone-tipo-pequeno { largura: 20px; alta: 20px; }
-        .nome { tamanho sim fonte: 0,9em; peso sim fonte: audacioso; cor: #00d4ff; }
- </estilo>
-</caboça>
-<corpo>
+    <div class="secao-tipo"><img src="imagens/icon/asset/fire_type_icon.png" class="icon-tipo"><h2>FOGO</h2></div>
+    <div class="grade">
+        <div class="card"><img src="imagens/monstros/fogo/redfishy_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/fire_type_icon.png" class="tipo-selo"><span class="nome">Redfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/fogo/flamefishy_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/fire_type_icon.png" class="tipo-selo"><span class="nome">Flamefishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/fogo/blazingfishy_03_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/fire_type_icon.png" class="tipo-selo"><span class="nome">Blazingfishy</span></div></div>
+    </div>
 
-<dividir classe="contêiner">
-    <dividir classe="cabeçalho">
-        <imagem fonte="imagens/ícone/ativo/bulu_monster_logo.png" classe="logotipo" alt="Monstro Bulu">
- </dividir>
+    <div class="secao-tipo"><img src="imagens/icon/asset/ice_type_icon.png" class="icon-tipo"><h2>GELO</h2></div>
+    <div class="grade">
+        <div class="card"><img src="imagens/monstros/gelo/icefishy_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/ice_type_icon.png" class="tipo-selo"><span class="nome">Icefishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/gelo/glacifishy_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/ice_type_icon.png" class="tipo-selo"><span class="nome">Glacifishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/gelo/frozenfishy_03_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/ice_type_icon.png" class="tipo-selo"><span class="nome">Frozenfishy</span></div></div>
+    </div>
 
-    <dividir classe="contêiner de banner">
-        <imagem fonte="imagens/01o aniversário.jpg" classe="banner">
- </dividir>
+    <div class="secao-tipo"><img src="imagens/icon/asset/evil_type_icon.png" class="icon-tipo"><h2>MAL</h2></div>
+    <div class="grade">
+        <div class="card"><img src="imagens/monstros/mal/evilfishy_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/evil_type_icon.png" class="tipo-selo"><span class="nome">Evilfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/mal/devilfishy_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/evil_type_icon.png" class="tipo-selo"><span class="nome">Devilfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/mal/mordefishy_03_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/evil_type_icon.png" class="tipo-selo"><span class="nome">Mordefishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/mal/unknown_01b_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/evil_type_icon.png" class="tipo-selo"><span class="nome">Unknown 01b</span></div></div>
+    </div>
 
-    <h1>Galeria fazer 1o Aniversário</h1>
+    <div class="secao-tipo"><img src="imagens/icon/asset/mythic_type_icon.png" class="icon-tipo"><h2>MÍTICO</h2></div>
+    <div class="grade">
+        <div class="card"><img src="imagens/monstros/mitico/aciefishy_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/mythic_type_icon.png" class="tipo-selo"><span class="nome">Aciefishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/mitico/ancientfishy_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/mythic_type_icon.png" class="tipo-selo"><span class="nome">Ancientfishy</span></div></div>
+    </div>
 
-    <dividir classe="tipo-titulo">
-        <imagem fonte="imagens/ícone/ativo/água_tipo_ícone.png" classe="ícone-tipo-título">
-        <h2>ÁGUA</h2>
- </dividir>
-    <dividir classe="nota">
-        <dividir classe="cartão">
-            <imagem fonte="imagens/monstros/agua/waterfishy_01_th_01.webp" classe="monstro-img">
-            <dividir classe="tipo-rodapé">
-                <imagem fonte="imagens/ícone/ativo/água_tipo_ícone.png" classe="icon-tipo-pequeno">
-                <extensão classe="nome">Peixe aquático</extensão>
- </dividir>
- </dividir>
- </dividir>
+    <div class="secao-tipo"><img src="imagens/icon/asset/spirit_type_icon.png" class="icon-tipo"><h2>SPIRIT</h2></div>
+    <div class="grade">
+        <div class="card">
+            <img src="imagens/monstros/spirit/telefishy_01_th_01.webp" id="tele" class="monstro-foto">
+            <div class="controles">
+                <button class="btn-v" onclick="mudar('tele', 'imagens/monstros/spirit/telefishy_01_th_01.webp')">Reg</button>
+                <button class="btn-v" onclick="mudar('tele', 'imagens/monstros/spirit/telefishy_natal_01_th_01.webp')">Nat</button>
+                <button class="btn-v" onclick="mudar('tele', 'imagens/monstros/spirit/telefishy_shyne_01_th_01.webp')">Shy</button>
+            </div>
+            <div class="info"><img src="imagens/icon/asset/spirit_type_icon.png" class="tipo-selo"><span class="nome">Telefishy</span></div>
+        </div>
+        <div class="card">
+            <img src="imagens/monstros/spirit/spiritfishy_02_th_01.webp" id="spirit" class="monstro-foto">
+            <div class="controles">
+                <button class="btn-v" onclick="mudar('spirit', 'imagens/monstros/spirit/spiritfishy_02_th_01.webp')">Reg</button>
+                <button class="btn-v" onclick="mudar('spirit', 'imagens/monstros/spirit/spiritfishy_natal_02_th_01.webp')">Nat</button>
+                <button class="btn-v" onclick="mudar('spirit', 'imagens/monstros/spirit/spiritfishy_shyne_02_th_01.webp')">Shy</button>
+            </div>
+            <div class="info"><img src="imagens/icon/asset/spirit_type_icon.png" class="tipo-selo"><span class="nome">Spiritfishy</span></div>
+        </div>
+        <div class="card">
+            <img src="imagens/monstros/spirit/psychicfishy_03_th_01.webp" id="psychic" class="monstro-foto">
+            <div class="controles">
+                <button class="btn-v" onclick="mudar('psychic', 'imagens/monstros/spirit/psychicfishy_03_th_01.webp')">Reg</button>
+                <button class="btn-v" onclick="mudar('psychic', 'imagens/monstros/spirit/psychicfishy_natal_03_th_01.webp')">Nat</button>
+                <button class="btn-v" onclick="mudar('psychic', 'imagens/monstros/spirit/psychicfishy_shyne_03_th_01.webp')">Shy</button>
+            </div>
+            <div class="info"><img src="imagens/icon/asset/spirit_type_icon.png" class="tipo-selo"><span class="nome">Psychicfishy</span></div>
+        </div>
+        <div class="card"><img src="imagens/monstros/spirit/unknown_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/spirit_type_icon.png" class="tipo-selo"><span class="nome">Unknown 01</span></div></div>
+        <div class="card"><img src="imagens/monstros/spirit/unknown_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/spirit_type_icon.png" class="tipo-selo"><span class="nome">Unknown 02</span></div></div>
+    </div>
 
-    <dividir classe="tipo-titulo">
-        <imagem fonte="imagens/ícone/ativo/dragon_type_icon.png" classe="ícone-tipo-título">
-        <h2>DRAGÃO</h2>
- </dividir>
-    <dividir classe="nota">
-        <dividir classe="cartão">
-            <imagem fonte="imagens/monstros/dragao/wyfishy_01_th_01.webp" classe="monstro-img">
-            <dividir classe="tipo-rodapé">
-                <imagem fonte="imagens/ícone/ativo/dragon_type_icon.png" classe="icon-tipo-pequeno">
-                <extensão classe="nome">Wyfishy</extensão>
- </dividir>
- </dividir>
- </dividir>
+    <div class="secao-tipo"><img src="imagens/icon/asset/earth_type_icon.png" class="icon-tipo"><h2>TERRA</h2></div>
+    <div class="grade">
+        <div class="card"><img src="imagens/monstros/terra/stonefishy_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/earth_type_icon.png" class="tipo-selo"><span class="nome">Stonefishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/terra/landfishy_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/earth_type_icon.png" class="tipo-selo"><span class="nome">Landfishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/terra/gaiafishy_03_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/earth_type_icon.png" class="tipo-selo"><span class="nome">Gaiafishy</span></div></div>
+    </div>
 
-</dividir>
+    <div class="secao-tipo"><img src="imagens/icon/asset/wind_type_icon.png" class="icon-tipo"><h2>VENTO</h2></div>
+    <div class="grade">
+        <div class="card"><img src="imagens/monstros/vento/windifishy_01_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/wind_type_icon.png" class="tipo-selo"><span class="nome">Windifishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/vento/breezefishy_02_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/wind_type_icon.png" class="tipo-selo"><span class="nome">Breezefishy</span></div></div>
+        <div class="card"><img src="imagens/monstros/vento/stormfishy_03_th_01.webp" class="monstro-foto"><div class="info"><img src="imagens/icon/asset/wind_type_icon.png" class="tipo-selo"><span class="nome">Stormfishy</span></div></div>
+    </div>
 
-</corpo>
- </HTML>
+</div>
+
+<script>
+    function mudar(id, path) {
+        document.getElementById(id).src = path;
+    }
+</script>
+
+</body>
+</html>
