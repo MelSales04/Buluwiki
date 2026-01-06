@@ -2,105 +2,43 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buluwiki - Galeria 1º Aniversário</title>
     <style>
-        body {
-            background-color: #121212;
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
+        body { background-color: #121212; color: white; font-family: sans-serif; text-align: center; margin: 0; padding: 20px; }
+        .banner { width: 100%; max-width: 800px; border: 2px solid #00d4ff; border-radius: 10px; margin-bottom: 20px; }
+        .tipo-secao { color: #ffcc00; margin-top: 40px; border-bottom: 1px solid #333; padding-bottom: 10px; text-align: left; text-transform: uppercase; }
+        .monstros-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; padding: 20px 0; }
+        .card { background: #1e1e1e; border: 1px solid #444; border-radius: 8px; padding: 10px; }
+        .card img { width: 100%; height: auto; image-rendering: pixelated; }
+        .nome { margin-top: 8px; font-size: 0.8em; color: #00d4ff; font-weight: bold; }
+    </style>
+</head>
+<body>
 
-        .container { max-width: 1100px; margin: 0 auto; }
+    <img src="imagens/01th-anniversary.jpg" class="banner">
+    
+    <h1>Galeria de Monstros</h1>
 
-        .banner-aniversario {
-            width: 100%;
-            border-radius: 15px;
-            border: 2px solid #00d4ff;
-            margin-bottom: 30px;
-        }
+    <h2 class="tipo-secao">Água</h2>
+    <div class="monstros-grade">
+        <div class="card"><img src="imagens/monstros/agua/waterfishy_01_th_01.webp"><div class="nome">Waterfishy</div></div>
+        <div class="card"><img src="imagens/monstros/agua/oceanfishy_02_th_01.webp"><div class="nome">Oceanfishy</div></div>
+        <div class="card"><img src="imagens/monstros/agua/abyssfishy_03_th_01.webp"><div class="nome">Abyssfishy</div></div>
+    </div>
 
-        .tipo-secao {
-            margin-top: 50px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-            text-align: left;
-            color: #ffcc00;
-            text-transform: uppercase;
-        }
+    <h2 class="tipo-secao">Comum</h2>
+    <div class="monstros-grade">
+        <div class="card"><img src="imagens/monstros/comum/fishy_01_th_01.webp"><div class="nome">Fishy</div></div>
+        <div class="card"><img src="imagens/monstros/comum/ordinfishy_02_th_01.webp"><div class="nome">Ordinfishy</div></div>
+        <div class="card"><img src="imagens/monstros/comum/mystfishy_03_th_01.webp"><div class="nome">Mystfishy</div></div>
+    </div>
 
-        .monstros-grade {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px;
-            padding: 20px 0;
-        }
+    <h2 class="tipo-secao">Dragão</h2>
+    <div class="monstros-grade">
+        <div class="card"><img src="imagens/monstros/dragao/wyfishy_01_th_01.webp"><div class="nome">Wyfishy</div></div>
+        <div class="card"><img src="imagens/monstros/dragao/dritfishy_02_th_01.webp"><div class="nome">Dritfishy</div></div>
+        <div class="card"><img src="imagens/monstros/dragao/dragkfishy_03_th_01.webp"><div class="nome">Dragkfishy</div></div>
+    </div>
 
-        .card-monstro {
-            fundo: #1e1e1e;
-            fronteira: 1px sólido #444;
-            raio de borda: 8px;
-            enchimento: 10px;
-            transição: 0,3s;
-        }
-
-        .monstro de cartas:par { cor sim borda: #00d4ff; transformar: escala(1,03); }
-
-        .monstro de cartas imagem { largura: 100%; alta: auto; }
-
-        .nome-monstro {
-            Margem superior: 8px;
-            tamanho sim fonte: 0,85em;
-            cor: #bbb;
-            transformação de texto: capitalizar;
-        }
- </estilo>
-</caboça>
-<corpo>
-
-    <dividir classe="contêiner">
-        <imagem fonte="imagens/01o aniversário.jpg" classe="banner-aniversário">
-        <h1>Galeria de Monstros</h1>
-
-        <dividir id="galeria"></dividir>
- </dividir>
-
-    <roteiro>
-        const listaMonstros = [
-            { tipo: "Água", macarrão: "água", arquivos: ["peixe aquático_01_th_01.webp", "oceanfishy_02_th_01.webp", "abyssfishy_03_th_01.webp", "desconhecido_th_01.webp"] },
-            { tipo: "Comum", macarrão: "comum", arquivos: ["fishy_01_th_01.webp", "ordinfishy_02_th_01.webp", "mystfishy_03_th_01.webp", "desconhecido_01c_th_01.webp", "unknown_02a_th_01.webp"] },
-            { tipo: "Dragão", macarrão: "dragao", arquivos: ["wyfishy_01_th_01.webp", "dritfishy_02_th_01.webp", "dragkfishy_03_th_01.webp"] },
-            { tipo: "Elétrico", macarrão: "elétrico", arquivos: ["elecfishy_01_th_01.webp", "lightfishy_02_th_01.webp", "thunderfishy_03_th_01.webp", "unknown_01a_th_01.webp"] },
-            { tipo: "Fogo", macarrão: "fogo", arquivos: ["redfishy_01_th_01.webp", "flamefishy_02_th_01.webp", "blazingfishy_03_th_01.webp"] },
-            { tipo: "Gelo", macarrão: "gelo", arquivos: ["icefishy_01_th_01.webp", "glacifishy_02_th_01.webp", "frozenfishy_03_th_01.webp"] },
-            { tipo: "Mal", macarrão: "mal", arquivos: ["evilfishy_01_th_01.webp", "devilfishy_02_th_01.webp", "mordefishy_03_th_01.webp", "desconhecido_01b_th_01.webp"] },
-            { tipo: "Mítico", macarrão: "mitico", arquivos: ["aciefishy_01_th_01.webp", "ancientfishy_02_th_01.webp"] },
-            { tipo: "Espírito", macarrão: "espírito", arquivos: ["telefishy_01_th_01.webp", "spiritfishy_02_th_01.webp", "psychicfishy_03_th_01.webp", "telefishy_natal_01_th_01.webp", "spiritfishy_natal_02_th_01.webp", "psychicfishy_natal_03_th_01.webp", "telefishy_shyne_01_th_01.webp", "spiritfishy_shyne_02_th_01.webp", "psychicfishy_shyne_03_th_01.webp", "unknown_01_th_01.webp", "unknown_02_th_01.webp"] },
-            { tipo: "Terra", macarrão: "terra", arquivos: ["stonefishy_01_th_01.webp", "landfishy_02_th_01.webp", "gaiafishy_03_th_01.webp"] },
-            { tipo: "Vento", macarrão: "vento", arquivos: ["windifishy_01_th_01.webp", "breezefishy_02_th_01.webp", "stormfishy_03_th_01.webp"] }
- ];
-
-        const galeriaDiv = documento. . . .obterElementoPorId('galeria');
-
-        listaMonstros.parágrafo cada cantarolar(secão => {
-            dêixar HTML = `<classe h2="tipo-secao">${secão.tipo}</h2><dividir classe="grau monstro">`;
-            
-            secão.arquivos.parágrafo cada cantarolar(foto => {
- // Limpa o nome parágrafo exibição (ex: redfishy_01_th_01 -> Peixe vermelho)
-                dêixar nomeLimpo = foto. . . .dividir('_')[0]; 
-                HTML += `
- <dividir classe="monstro de cartas">
- <imagem fonte="imagens/monstros/${seção.macarrão}/${foto}" alt="${nomeLimpo}">
- <dividir classe="nome-monstro">${nomeLimpo}</dividir>
- </dividir>`;
-            });
-
-            HTML += `</dividir>`;
-            galeriaDiv.HTML interno += HTML;
-        });
- </roteiro>
-</corpo>
- </HTML>
+</body>
+</html>
