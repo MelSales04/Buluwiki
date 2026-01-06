@@ -51,8 +51,10 @@
 
     .banner {
       width: 100%;
-      max-height: 240px;
-      object-fit: cover;
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      background: #0f1220;
       border-radius: 14px;
       margin-bottom: 25px;
     }
@@ -67,6 +69,34 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
       gap: 20px;
+    }
+
+    .monster-card {
+      background: #1c2148;
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .evolution-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .evolution-line img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      background: #0f1220;
+      border-radius: 10px;
+      padding: 4px;
+    }
+
+    .evolution-line span {
+      opacity: 0.6;
     }
 
     .monster-card {
@@ -142,36 +172,165 @@
 </nav>
 
 <main>
-  <img id="banner" class="banner" src="imagens/12th-anniversary.jpg" />
+  <img id="banner" class="banner" src="imagens/01th-anniversary.jpg" />
 
   <div class="monster-grid">
 
-    <!-- EXEMPLO COM FORMAS -->
-    <div class="monster-card" data-anniversary="12" data-unknown="false">
-      <img class="monster" id="telefishy" src="imagens/monstros/spirit/telefishy_01_th_01.webp" />
-      <h3>Telefishy</h3>
+  <!-- ===== 1º ANIVERSÁRIO – LINHAS EVOLUTIVAS OFICIAIS ===== -->
 
-      <div class="type">
-        <img src="imagens/imagens/icon/asset/spirit_type_icon.png" /> Spirit
-      </div>
-
-      <div class="forms">
-        <button onclick="changeForm('telefishy','imagens/monstros/spirit/telefishy_01_th_01.webp')">Normal</button>
-        <button onclick="changeForm('telefishy','imagens/monstros/spirit/telefishy_natal_01_th_01.webp')">Natal</button>
-        <button onclick="changeForm('telefishy','imagens/monstros/spirit/telefishy_shyne_01_th_01.webp')">Shyne</button>
-      </div>
+  <!-- ÁGUA -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Water)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/agua/waterfishy_01_th_01.webp" title="Inicial" />
+      <span>→</span>
+      <img src="imagens/monstros/agua/oceanfishy_02_th_01.webp" title="Intermediário" />
+      <span>→</span>
+      <img src="imagens/monstros/agua/abyssfishy_03_th_01.webp" title="Adulto" />
     </div>
-
-    <!-- UNKNOWN -->
-    <div class="monster-card" data-anniversary="12" data-unknown="true">
-      <img class="monster" src="imagens/monstros/agua/unknown_th_01.webp" />
-      <h3>Unknown</h3>
-      <div class="type">
-        <img src="imagens/imagens/icon/asset/water_type_icon.png" /> Water
-      </div>
-    </div>
-
+    <div class="type"><img src="imagens/imagens/icon/asset/water_type_icon.png" /> Water</div>
   </div>
+
+  <!-- COMUM -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Common)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/comum/fishy_01_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/comum/ordinfishy_02_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/comum/mystfishy_03_th_01.webp" />
+    </div>
+    <div class="type"><img src="imagens/imagens/icon/asset/common_type_icon.png" /> Common</div>
+  </div>
+
+  <!-- DRAGÃO -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Dragon)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/dragao/wyfishy_01_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/dragao/dritfishy_02_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/dragao/dragkfishy_03_th_01.webp" />
+    </div>
+    <div class="type"><img src="imagens/imagens/icon/asset/dragon_type_icon.png" /> Dragão</div>
+  </div>
+
+  <!-- ELÉTRICO -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Lightning)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/eletrico/elecfishy_01_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/eletrico/lightfishy_02_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/eletrico/thunderfishy_03_th_01.webp" />
+    </div>
+    <div class="type"><img src="imagens/imagens/icon/asset/lightning_type_icon.png" /> Lightning</div>
+  </div>
+
+  <!-- FOGO -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Fire)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/fogo/redfishy_01_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/fogo/flamefishy_02_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/fogo/blazingfishy_03_th_01.webp" />
+    </div>
+    <div class="type"><img src="imagens/imagens/icon/asset/fire_type_icon.png" /> Fire</div>
+  </div>
+
+  <!-- GELO -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Ice)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/gelo/icefishy_01_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/gelo/glacifishy_02_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/gelo/frozenfishy_03_th_01.webp" />
+    </div>
+    <div class="type"><img src="imagens/imagens/icon/asset/ice_type_icon.png" /> Ice</div>
+  </div>
+
+  <!-- MAL -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Evil)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/mal/evilfishy_01_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/mal/devilfishy_02_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/mal/mordefishy_03_th_01.webp" />
+    </div>
+    <div class="type"><img src="imagens/imagens/icon/asset/evil_type_icon.png" /> Evil</div>
+  </div>
+
+  <!-- MÍTICO (SEM ADULTO) -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Mythic)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/mitico/aciefishy_01_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/mitico/ancientfishy_02_th_01.webp" />
+    </div>
+    <div class="type"><img src="imagens/imagens/icon/asset/mythic_type_icon.png" /> Mythic</div>
+  </div>
+
+  <!-- SPIRIT -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Spirit)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/spirit/telefishy_01_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/spirit/spiritfishy_02_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/spirit/psychicfishy_03_th_01.webp" />
+    </div>
+    <div class="type"><img src="imagens/imagens/icon/asset/spirit_type_icon.png" /> Spirit</div>
+  </div>
+
+  <!-- TERRA -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Earth)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/terra/stonefishy_01_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/terra/landfishy_02_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/terra/gaiafishy_03_th_01.webp" />
+    </div>
+    <div class="type"><img src="imagens/imagens/icon/asset/earth_type_icon.png" /> Earth</div>
+  </div>
+
+  <!-- VENTO -->
+  <div class="monster-card" data-anniversary="01" data-unknown="false">
+    <h3>Fishy (Wind)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/vento/windifishy_01_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/vento/breezefishy_02_th_01.webp" />
+      <span>→</span>
+      <img src="imagens/monstros/vento/stormfishy_03_th_01.webp" />
+    </div>
+    <div class="type"><img src="imagens/imagens/icon/asset/wind_type_icon.png" /> Wind</div>
+  </div>
+
+  <!-- ===== UNKNOWN (SEPARADOS) ===== -->
+
+  <div class="monster-card" data-anniversary="01" data-unknown="true">
+    <h3>Unknown (Descartado)</h3>
+    <div class="evolution-line">
+      <img src="imagens/monstros/comum/unknown_01c_th_01.webp" />
+      <img src="imagens/monstros/comum/unknown_02a_th_01.webp" />
+    </div>
+    <div class="type">Unknown</div>
+  </div>
+
+</div>
 </main>
 
 <footer>
