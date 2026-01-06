@@ -1,9 +1,9 @@
-          <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bulu Monster News – Mega Encyclopedia</title>
+  <title>Bulu Monster News – Enciclopédia de Aniversários</title>
   <style>
     :root {
       --primary: #3ad6c5;
@@ -21,65 +21,122 @@
     nav { background: #151933; display: flex; justify-content: center; gap: 8px; padding: 15px; flex-wrap: wrap; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #333; }
     nav button { background: #1c2148; border: 1px solid #444; color: #ffffff; font-weight: bold; cursor: pointer; padding: 10px 14px; border-radius: 8px; transition: 0.3s; }
     nav button.active, nav button:hover { background: var(--primary); color: #0f1220; transform: translateY(-2px); }
+    .btn-unknown { border-color: #ff4444; color: #ff4444; }
 
     main { padding: 20px; max-width: 1400px; margin: auto; }
     .banner { width: 100%; border-radius: 15px; margin-bottom: 30px; border: 2px solid #333; }
 
-    .monster-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 25px; }
+    /* Grid aumentado para acomodar 4 estágios com conforto */
+    .monster-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); 
+        gap: 30px; 
+    }
     
-    .monster-card { background: var(--card-bg); border-radius: 18px; padding: 20px; text-align: center; border: 1px solid #2a2f55; transition: 0.3s; }
+    .monster-card { 
+        background: var(--card-bg); 
+        border-radius: 20px; 
+        padding: 25px; 
+        text-align: center; 
+        border: 2px solid #2a2f55; 
+        transition: transform 0.3s ease;
+    }
+    .monster-card:hover { transform: translateY(-5px); border-color: var(--primary); }
     
     .type-label { display: flex; justify-content: center; align-items: center; gap: 8px; font-weight: bold; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; font-size: 0.9rem; }
     .type-label img { width: 22px; height: 22px; }
 
-    .evolution-line { display: flex; align-items: center; justify-content: center; gap: 5px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; flex-wrap: wrap; }
+    .evolution-line { 
+        display: flex; 
+        align-items: center; 
+        justify-content: space-around; 
+        background: rgba(0,0,0,0.4); 
+        padding: 20px; 
+        border-radius: 15px; 
+    }
     
-    .evo-stage { display: flex; flex-direction: column; align-items: center; width: 90px; margin: 5px; position: relative; }
-    .evo-stage img { width: 75px; height: 75px; object-fit: contain; margin-bottom: 8px; z-index: 2; }
-    .evo-stage span { font-size: 0.65rem; color: var(--text-blue); font-weight: bold; min-height: 30px; line-height: 1.1; }
+    .evo-stage { display: flex; flex-direction: column; align-items: center; width: 95px; position: relative; }
+    .evo-stage img { width: 75px; height: 75px; object-fit: contain; margin-bottom: 8px; transition: 0.3s; }
+    .evo-stage span { font-size: 0.7rem; color: var(--text-blue); font-weight: bold; min-height: 30px; line-height: 1.1; }
 
-    /* EFEITO MEGA GLOW */
-    .mega-stage img { 
-        filter: drop-shadow(0 0 8px var(--mega-gold)); 
-        animation: pulse-glow 2s infinite ease-in-out;
+    /* ESTILO ESPECIAL PARA MEGA EVOLUÇÃO */
+    .mega-stage { width: 120px; }
+    .mega-stage img:not(.item-icon) { 
+        width: 100px; 
+        height: 100px; 
+        filter: drop-shadow(0 0 10px var(--mega-gold)); 
+        animation: pulse-glow 2.5s infinite ease-in-out;
     }
     .mega-stage span { color: var(--mega-gold) !important; text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
 
-    @keyframes pulse-glow {
-        0%, 100% { filter: drop-shadow(0 0 5px var(--mega-gold)); transform: scale(1); }
-        50% { filter: drop-shadow(0 0 15px var(--mega-gold)); transform: scale(1.05); }
+    .item-icon { 
+        width: 32px !important; 
+        height: 32px !important; 
+        position: absolute; 
+        top: -12px; 
+        right: -5px; 
+        background: radial-gradient(circle, #fff, var(--mega-gold));
+        border: 2px solid #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--mega-gold);
+        z-index: 10;
     }
 
-    .item-icon { width: 25px !important; height: 25px !important; position: absolute; top: -10px; right: 5px; background: #000; border-radius: 50%; border: 1px solid var(--mega-gold); }
+    @keyframes pulse-glow {
+        0%, 100% { filter: drop-shadow(0 0 8px var(--mega-gold)); transform: scale(1); }
+        50% { filter: drop-shadow(0 0 20px var(--mega-gold)); transform: scale(1.06); }
+    }
 
-    .arrow { color: var(--primary); font-weight: bold; font-size: 1.2rem; opacity: 0.4; }
+    .arrow { color: var(--primary); font-weight: bold; font-size: 1.3rem; opacity: 0.4; }
 
-    footer { text-align: center; padding: 40px; color: #555; font-size: 0.85rem; border-top: 1px solid #1c2148; margin-top: 50px; }
+    .forms-btns { margin-top: 15px; display: flex; justify-content: center; gap: 8px; }
+    .forms-btns button { font-size: 0.65rem; padding: 6px 12px; cursor: pointer; background: #0f1220; color: white; border: 1px solid var(--primary); border-radius: 5px; }
+
+    footer { text-align: center; padding: 50px; color: #555; font-size: 0.9rem; border-top: 1px solid #1c2148; margin-top: 50px; }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="imagens/imagens/icon/asset/bulu_monster_logo.png" alt="Bulu Monster Logo" />
+  <img src="imagens/imagens/icon/asset/bulu_monster_logo.png" alt="Bulu Logo" />
   <h1>Bulu Monster News</h1>
 </header>
 
-<nav id="navBar">
+<nav>
   <button onclick="filterAniv('all')" class="active">Todos</button>
   <button onclick="filterAniv('01')">01º Aniv.</button>
   <button onclick="filterAniv('02')">02º Aniv.</button>
   <button onclick="filterAniv('03')">03º Aniv.</button>
   <button onclick="filterAniv('04')">04º Aniv.</button>
-  <button onclick="filterAniv('unknown')">Descartado</button>
+  <button onclick="filterAniv('05')">05º Aniv.</button>
+  <button onclick="filterAniv('06')">06º Aniv.</button>
+  <button onclick="filterAniv('07')">07º Aniv.</button>
+  <button onclick="filterAniv('08')">08º Aniv.</button>
+  <button onclick="filterAniv('09')">09º Aniv.</button>
+  <button onclick="filterAniv('10')">10º Aniv.</button>
+  <button onclick="filterAniv('11')">11º Aniv.</button>
+  <button onclick="filterAniv('12')">12º Aniv.</button>
+  <button onclick="filterAniv('unknown')" class="btn-unknown">Descartado</button>
 </nav>
 
 <main>
   <img id="banner" class="banner" src="imagens/01th-anniversary.jpg" />
 
-  <div class="monster-grid" id="mainGrid">
+  <div class="monster-grid">
     
-    <div class="monster-card" data-anniversary="02">
-      <div class="type-label"><img src="imagens/imagens/icon/asset/dragon_type_icon.png" /> Dragon</div>
+    <div class="monster-card" data-anniversary="01" data-unknown="false">
+      <div class="type-label"><img src="imagens/imagens/icon/asset/water_type_icon.png" /> Water</div>
+      <div class="evolution-line">
+        <div class="evo-stage"><img src="imagens/monstros/agua/waterfishy_01_th_01.webp" /><span>Waterfishy</span></div>
+        <div class="arrow">→</div>
+        <div class="evo-stage"><img src="imagens/monstros/agua/oceanfishy_02_th_01.webp" /><span>Oceanfishy</span></div>
+        <div class="arrow">→</div>
+        <div class="evo-stage"><img src="imagens/monstros/agua/abyssfishy_03_th_01.webp" /><span>Abyssfishy</span></div>
+      </div>
+    </div>
+
+    <div class="monster-card" data-anniversary="02" data-unknown="false">
+      <div class="type-label"><img src="imagens/imagens/icon/asset/dragon_type_icon.png" /> Dragon Line</div>
       <div class="evolution-line">
         <div class="evo-stage"><img src="imagens/monstros/dragao/sigg_01_th_02.webp" /><span>Sigg</span></div>
         <div class="arrow">→</div>
@@ -88,15 +145,15 @@
         <div class="evo-stage"><img src="imagens/monstros/dragao/siggonit_03_th_02.webp" /><span>Siggonit</span></div>
         <div class="arrow">→</div>
         <div class="evo-stage mega-stage">
-            <img src="imagens/imagens/icon/mega-evolucao/siggdrak_evo_sigma_power_02_th.webp" class="item-icon" title="Sigma Power" />
+            <img src="imagens/imagens/icon/mega-evolucao/siggdrak_evo_sigma_power_02_th.webp" class="item-icon" />
             <img src="imagens/monstros/dragao/siggdrak_04_th_02.webp" />
             <span>Siggdrak (MEGA)</span>
         </div>
       </div>
     </div>
 
-    <div class="monster-card" data-anniversary="03">
-      <div class="type-label"><img src="imagens/imagens/icon/asset/dragon_type_icon.png" /> Dragon</div>
+    <div class="monster-card" data-anniversary="03" data-unknown="false">
+      <div class="type-label"><img src="imagens/imagens/icon/asset/dragon_type_icon.png" /> Dragon Line</div>
       <div class="evolution-line">
         <div class="evo-stage"><img src="imagens/monstros/dragao/siggy_01_th_03.webp" /><span>Siggy</span></div>
         <div class="arrow">→</div>
@@ -105,15 +162,15 @@
         <div class="evo-stage"><img src="imagens/monstros/dragao/sigmetit_03_th_03.webp" /><span>Sigmetit</span></div>
         <div class="arrow">→</div>
         <div class="evo-stage mega-stage">
-            <img src="imagens/imagens/icon/mega-evolucao/siggement_evo_sigma_gem_03_th.webp" class="item-icon" title="Sigma Gem" />
+            <img src="imagens/imagens/icon/mega-evolucao/siggement_evo_sigma_gem_03_th.webp" class="item-icon" />
             <img src="imagens/monstros/dragao/siggement_04_th_03.webp" />
             <span>Siggement (MEGA)</span>
         </div>
       </div>
     </div>
 
-    <div class="monster-card" data-anniversary="04">
-      <div class="type-label"><img src="imagens/imagens/icon/asset/dragon_type_icon.png" /> Dragon</div>
+    <div class="monster-card" data-anniversary="04" data-unknown="false">
+      <div class="type-label"><img src="imagens/imagens/icon/asset/dragon_type_icon.png" /> Dragon Line</div>
       <div class="evolution-line">
         <div class="evo-stage"><img src="imagens/monstros/dragao/sigqua_01_th_04.webp" /><span>Sigqua</span></div>
         <div class="arrow">→</div>
@@ -122,10 +179,23 @@
         <div class="evo-stage"><img src="imagens/monstros/dragao/sigquigon_03_th_04.webp" /><span>Sigquigon</span></div>
         <div class="arrow">→</div>
         <div class="evo-stage mega-stage">
-            <img src="imagens/imagens/icon/mega-evolucao/siggtaple_evo_sigma_elixir_04_th.webp" class="item-icon" title="Sigma Elixir" />
+            <img src="imagens/imagens/icon/mega-evolucao/siggtaple_evo_sigma_elixir_04_th.webp" class="item-icon" />
             <img src="imagens/monstros/dragao/siggtaple_04_th_04.webp" />
             <span>Siggtaple (MEGA)</span>
         </div>
+      </div>
+    </div>
+
+    <div class="monster-card" data-anniversary="01" data-unknown="true">
+      <div class="type-label" style="color:#ff4444">Descartados (Unknowns)</div>
+      <div class="evolution-line">
+        <div class="evo-stage"><img src="imagens/monstros/comum/unknown_01_th_01.webp" /><span>Unknown 01</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/comum/unknown_02_th_01.webp" /><span>Unknown 02</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/comum/unknown_01b_th_01.webp" /><span>Unknown 01b</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/eletrico/unknown_01a_th_01.webp" /><span>Unknown 01a</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/comum/unknown_01c_th_01.webp" /><span>Unknown 01c</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/comum/unknown_02a_th_01.webp" /><span>Unknown 02a</span></div>
+        <div class="evo-stage"><img src="imagens/monstros/agua/unknown_th_01.webp" /><span>Unknown Water</span></div>
       </div>
     </div>
 
@@ -133,30 +203,31 @@
 </main>
 
 <footer>
-  Bulu Monster News & Mega Evolution Guide © 2026
+  Bulu Monster News © 2026 - Enciclopédia de Aniversários
 </footer>
 
 <script>
   function filterAniv(val) {
-    const buttons = document.querySelectorAll('nav button');
-    buttons.forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
     event.currentTarget.classList.add('active');
-
     const cards = document.querySelectorAll('.monster-card');
     const banner = document.getElementById('banner');
 
-    if(val === 'all') {
-        cards.forEach(c => c.style.display = 'block');
-        banner.style.display = 'block';
-        banner.src = 'imagens/01th-anniversary.jpg';
-    } else if(val === 'unknown') {
-        cards.forEach(c => c.style.display = (c.getAttribute('data-unknown') === 'true') ? 'block' : 'none');
-        banner.style.display = 'none';
+    if (val !== 'all' && val !== 'unknown') {
+      banner.src = `imagens/${val}th-anniversary.jpg`;
+      banner.style.display = "block";
+    } else if (val === 'unknown') {
+      banner.style.display = "none";
     } else {
-        cards.forEach(c => c.style.display = (c.getAttribute('data-anniversary') === val) ? 'block' : 'none');
-        banner.style.display = 'block';
-        banner.src = `imagens/${val}th-anniversary.jpg`;
+      banner.src = `imagens/01th-anniversary.jpg`;
+      banner.style.display = "block";
     }
+
+    cards.forEach(c => {
+      if (val === 'all') c.style.display = 'block';
+      else if (val === 'unknown') c.style.display = (c.dataset.unknown === 'true') ? 'block' : 'none';
+      else c.style.display = (c.dataset.anniversary === val && c.dataset.unknown === 'false') ? 'block' : 'none';
+    });
   }
 </script>
 
