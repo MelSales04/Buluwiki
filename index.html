@@ -3,33 +3,40 @@
 <meta charset="UTF-8">
 <title>Legendary Cup – Siggdrak</title>
 <style>
-body{
-  margin:0;
-  background:#05080f;
+body {
+  background:#0b0b0f;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   height:100vh;
-  font-family:Arial, Helvetica, sans-serif;
-}.legendary-card{ position:relative; width:320px; height:480px; border-radius:28px; overflow:hidden; background:#020617; box-shadow:0 0 40px rgba(56,189,248,0.25); }
+  font-family: 'Segoe UI', sans-serif;
+}.card { width:280px; height:420px; position:relative; border-radius:18px; overflow:hidden; box-shadow:0 0 40px rgba(120,80,255,.35); }
 
-.book-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.25; }
+.card::before { content:""; position:absolute; inset:0; background:url("imagens/book_dragon.webp") center/cover; filter:brightness(.55); }
 
-.legendary-glow{ position:absolute; inset:0; background:radial-gradient(circle at center, rgba(56,189,248,0.7), rgba(56,189,248,0.2), transparent 70%); filter:blur(22px); animation:glowPulse 3s infinite; }
+.title { position:absolute; top:14px; width:100%; text-align:center; font-weight:700; letter-spacing:1px; color:#e8dcff; text-shadow:0 0 8px rgba(180,140,255,.8); z-index:5; }
 
-.monster{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:80%; animation:fadeCycle 6s infinite; filter:drop-shadow(0 0 18px rgba(120,200,255,0.8)); }
+.monster { position:absolute; inset:0; display:flex; justify-content:center; align-items:center; z-index:4; }
 
-.legendary-title{ position:absolute; bottom:16px; width:100%; text-align:center; font-size:20px; letter-spacing:1px; color:#e5f2ff; text-shadow:0 0 12px rgba(56,189,248,0.8); }
+.monster img { width:85%; opacity:0; animation: evolution 16s infinite; filter:drop-shadow(0 0 12px rgba(160,120,255,.8)); }
 
-@keyframes fadeCycle{ 0%{opacity:0; transform:translate(-50%,-50%) scale(0.92)} 20%{opacity:1; transform:translate(-50%,-50%) scale(1)} 80%{opacity:1} 100%{opacity:0; transform:translate(-50%,-50%) scale(1.05)} }
+.monster img:nth-child(1) { animation-delay:0s; } .monster img:nth-child(2) { animation-delay:4s; } .monster img:nth-child(3) { animation-delay:8s; } .monster img:nth-child(4) { animation-delay:12s; filter:drop-shadow(0 0 28px rgba(255,220,120,1)); }
 
-@keyframes glowPulse{ 0%{opacity:.4} 50%{opacity:1} 100%{opacity:.4} } </style>
+@keyframes evolution { 0% { opacity:0; transform:scale(.85); } 10% { opacity:1; transform:scale(1); } 30% { opacity:1; } 40% { opacity:0; transform:scale(1.1); } 100% { opacity:0; } }
+
+.mega-glow { position:absolute; inset:0; background:radial-gradient(circle, rgba(255,220,120,.45), transparent 60%); opacity:0; animation: megaGlow 16s infinite; z-index:3; }
+
+@keyframes megaGlow { 0%,70% { opacity:0; } 75% { opacity:1; } 90% { opacity:.4; } 100% { opacity:0; } }
+
+.footer { position:absolute; bottom:12px; width:100%; text-align:center; font-size:12px; color:#cbb8ff; letter-spacing:1px; z-index:5; } </style>
 
 </head>
-<body><div class="legendary-card">
-  <img class="book-bg" src="imagens/imagens/icon/asset/monster_book_dragon.webp">
-  <div class="legendary-glow"></div>
-  <img class="monster" src="imagens/monstros/dragao/siggdrak_04_th_02.webp">
-  <div class="legendary-title">SIGGDRAK<br><small>Legendary Cup Edition</small></div>
+<body><div class="card">
+  <div class="title">SIGGDRAK<br>Legendary Cup</div>  <div class="monster">
+    <img src="imagens/monstros/dragao/sigg_01_th_02.webp">
+    <img src="imagens/monstros/dragao/siggit_02_th_02.webp">
+    <img src="imagens/monstros/dragao/siggonit_03_th_02.webp">
+    <img src="imagens/monstros/dragao/siggdrak_04_th_02.webp">
+  </div>  <div class="mega-glow"></div>  <div class="footer">MEGA EVOLUTION</div>
 </div></body>
 </html>
