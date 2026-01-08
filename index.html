@@ -236,8 +236,9 @@
         .mega-item-container {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 15px;
-            margin-left: 20px;
+            margin-top: 20px;
             padding: 10px 20px;
             background: rgba(255, 215, 0, 0.1);
             border-radius: 10px;
@@ -262,7 +263,7 @@
             gap: 8px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 15px;
+            margin-bottom: 15px;
         }
 
         .variant-btn {
@@ -394,7 +395,6 @@
 
             .mega-item-container {
                 margin-left: 0;
-                margin-top: 10px;
             }
         }
     </style>
@@ -504,7 +504,6 @@
         const BASE_URL = 'https://raw.githubusercontent.com/Melzyi/Buluwiki/main/';
         let isShiny = false;
 
-        // Mapeamento dos itens de mega evolução
         const megaItems = {
             'siggdrak_04': 'siggdrak_evo_sigma_power_02_th',
             'siggement_04': 'siggement_evo_sigma_gem_03_th',
@@ -538,28 +537,175 @@
 
         const monsterData = {
             1: {
-                common: [
-                    { line: ['fishy_01', 'ordinfishy_02', 'mystfishy_03'], variants: [] }
+                common: [{ line: ['fishy_01', 'ordinfishy_02', 'mystfishy_03'], variants: [] }],
+                dragon: [{ line: ['wyfishy_01', 'dritfishy_02', 'dragkfishy_03'], variants: [] }],
+                earth: [{ line: ['stonefishy_01', 'landfishy_02', 'gaiafishy_03'], variants: [] }],
+                evil: [{ line: ['evilfishy_01', 'devilfishy_02', 'mordefishy_03'], variants: [] }],
+                fire: [{ line: ['redfishy_01', 'flamefishy_02', 'blazingfishy_03'], variants: [] }],
+                ice: [{ line: ['icefishy_01', 'glacifishy_02', 'frozenfishy_03'], variants: [] }],
+                lightning: [{ line: ['elecfishy_01', 'lightfishy_02', 'thunderfishy_03'], variants: [] }],
+                mythic: [{ line: ['aciefishy_01', 'ancientfishy_02'], variants: [] }],
+                spirit: [{ line: ['telefishy_01', 'spiritfishy_02', 'psychicfishy_03'], variants: ['natal', 'shyne'] }],
+                water: [{ line: ['waterfishy_01', 'oceanfishy_02', 'abyssfishy_03'], variants: [] }],
+                wind: [{ line: ['windifishy_01', 'breezefishy_02', 'stormfishy_03'], variants: [] }]
+            },
+            2: { dragon: [{ line: ['sigg_01', 'siggit_02', 'siggonit_03', 'siggdrak_04'], variants: [] }] },
+            3: { dragon: [{ line: ['siggy_01', 'sigmot_02', 'sigmetit_03', 'siggement_04'], variants: [] }] },
+            4: { dragon: [{ line: ['sigqua_01', 'sigquid_02', 'sigquigon_03', 'siggtaple_04'], variants: [] }] },
+            5: {
+                common: [{ line: ['punchant_01', 'boxant_02'], variants: [] }],
+                dragon: [{ line: ['daara_01', 'gararah_02', 'garajion_03'], variants: [] }],
+                earth: [{ line: ['earthdillo_01', 'gaiadillo_02'], variants: [] }],
+                evil: [{ line: ['soullent_01', 'ghoosent_02'], variants: [] }],
+                fire: [{ line: ['fireater_01', 'flameater_02', 'blazeater_03'], variants: [] }],
+                ice: [{ line: ['ragebea_01', 'terrobear_02'], variants: [] }],
+                lightning: [{ line: ['elecir_01', 'eleckuu_02', 'eleccuma_03'], variants: [] }],
+                mythic: [{ line: ['miracle_solo_sheep_04'], variants: ['natal', 'shyne'], solo: true }],
+                spirit: [
+                    { line: ['spirikett_01', 'psychokett_02'], variants: [] },
+                    { line: ['ancient_sheep_solo_02'], variants: ['natal', 'shyne'], solo: true }
                 ],
-                dragon: [
-                    { line: ['wyfishy_01', 'dritfishy_02', 'dragkfishy_03'], variants: [] }
-                ],
-                earth: [
-                    { line: ['stonefishy_01', 'landfishy_02', 'gaiafishy_03'], variants: [] }
-                ],
-                evil: [
-                    { line: ['evilfishy_01', 'devilfishy_02', 'mordefishy_03'], variants: [] }
-                ],
-                fire: [
-                    { line: ['redfishy_01', 'flamefishy_02', 'blazingfishy_03'], variants: [] }
-                ],
-                ice: [
-                    { line: ['icefishy_01', 'glacifishy_02', 'frozenfishy_03'], variants: [] }
-                ],
-                lightning: [
-                    { line: ['elecfishy_01', 'lightfishy_02', 'thunderfishy_03'], variants: [] }
-                ],
-                mythic: [
-                    { line: ['aciefishy_01', 'ancientfishy_02'], variants: [] }
-                ],
-  i
+                water: [{ line: ['aquapole_01', 'aquatoad_02', 'clownfrog_03'], variants: [] }],
+                wind: [{ line: ['cutou_01', 'toucan_02'], variants: [] }]
+            },
+            6: {
+                dragon: [{ line: ['hatchette_01', 'areochett_02', 'gaiachett_03', 'ultichett_04'], variants: [] }],
+                evil: [{ line: ['prison_breaker_solo_04'], variants: ['hyakki_yagyo', 'shyne'], solo: true }],
+                ice: [{ line: ['snowlords_solo_04'], variants: ['first_birthday', 'shyne'], solo: true }]
+            },
+            7: {
+                common: [{ line: ['scissz_01', 'scissor_02', 'scisserg_03'], variants: [] }],
+                dragon: [{ line: ['sigiv_01', 'sigilva_02', 'sigversa_03', 'sigversith_04'], variants: [] }]
+            },
+            8: { dragon: [{ line: ['sigco_01', 'sigcom_02', 'sigcobie_03', 'sigcobinith_04'], variants: [] }] },
+            9: { evil: [{ line: ['hydrix_01', 'hydrely_02', 'hydriola_03', 'hydrellion_04'], variants: [] }] },
+            10: {
+                common: [{ line: ['morphiz_01', 'morphio_02', 'morphiant_03', 'orriginph_04'], variants: [] }],
+                dragon: [{ line: ['mordrak_solo_04'], variants: [], solo: true }],
+                earth: [{ line: ['gaiaphyz_solo_04'], variants: [], solo: true }],
+                evil: [{ line: ['darkphlame_solo_04'], variants: [], solo: true }],
+                fire: [{ line: ['flarephiant_solo_04'], variants: [], solo: true }],
+                ice: [{ line: ['crystophy_solo_04'], variants: [], solo: true }],
+                lightning: [{ line: ['thunderoph_solo_04'], variants: [], solo: true }],
+                mythic: [{ line: ['primorphio_solo_04'], variants: [], solo: true }],
+                spirit: [{ line: ['morgicka_solo_04'], variants: [], solo: true }],
+                water: [{ line: ['aquamorph_solo_04'], variants: [], solo: true }],
+                wind: [{ line: ['cyclonph_solo_04'], variants: [], solo: true }]
+            },
+            11: {
+                earth: [{ line: ['terraling_01', 'terradrake_02', 'terrawyrm_03', 'terranir_04'], variants: [] }],
+                mythic: [{ line: ['tempestnir_solo_04'], variants: [], solo: true }],
+                wind: [{ line: ['drifting_01', 'driftdrake_02', 'driftwyrm_03', 'driftnir_04'], variants: [] }]
+            },
+            12: {
+                mythic: [{ line: ['skurnub_01', 'skurgon_02', 'skurnaris_03', 'skurvorr_04'], variants: [] }],
+                umbral: [
+                    { line: ['duskir_01', 'duskuu_02', 'noctcuma_03'], variants: [] },
+                    { line: ['umbrangler_solo_04'], variants: [], solo: true },
+                    { line: ['bearmask_solo_01'], variants: [], solo: true },
+                    { line: ['umbbiz_01', 'umbbibi_02'], variants: [] },
+                    { line: ['duskit_01', 'duskarn_02', 'duskryn_03', 'duskvorr_04'], variants: [] }
+                ]
+            }
+        };
+
+        document.querySelectorAll('.tab-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetTab = btn.dataset.tab;
+                document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(targetTab + '-tab').classList.add('active');
+            });
+        });
+
+        function formatMonsterName(filename) {
+            let name = filename.replace(/_\d+$/, '').replace(/_solo/g, '');
+            return name.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
+
+        function loadMonsters(num) {
+            const display = document.getElementById('monster-display');
+            const data = monsterData[num];
+            const numStr = num.toString().padStart(2, '0');
+            let html = '';
+            
+            for (const [type, monsterGroups] of Object.entries(data)) {
+                html += `<div class="monster-type-section"><div class="type-header"><img src="${BASE_URL}imagens/type_icon/${type}_type_icon.png" class="type-icon"><div class="type-name">${type} Type</div></div>`;
+                
+                monsterGroups.forEach((group, idx) => {
+                    const lineId = `line-${type}-${idx}`;
+                    html += `<div class="evolution-line-container" id="${lineId}">`;
+                    
+                    if (group.variants.length > 0) {
+                        html += '<div class="variant-buttons"><button class="variant-btn active" data-variant="normal" data-line-id="' + lineId + '">Normal</button>';
+                        group.variants.forEach(v => {
+                            const vName = v.replace(/_/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                            html += `<button class="variant-btn" data-variant="${v}" data-line-id="${lineId}">${vName}</button>`;
+                        });
+                        html += '</div>';
+                    }
+                    
+                    html += '<div class="evolution-stages">';
+                    group.line.forEach((monster, i) => {
+                        const isMega = monster.includes('_04') || (monster.includes('_03') && group.line.length === 3);
+                        html += `<div class="evolution-stage"><img src="${BASE_URL}imagens/anniversary_monsters/monster_${numStr}th/${type}_type_${numStr}th/${monster}_th_${numStr}.webp" class="evo-stage-img ${isMega ? 'mega-evolution' : ''}" data-base="${monster}" data-type="${type}" data-num="${numStr}"><div class="evolution-stage-name">${formatMonsterName(monster.replace(/_solo/g, ''))}</div></div>`;
+                        if (i < group.line.length - 1) html += '<div class="evolution-arrow">→</div>';
+                    });
+                    html += '</div>';
+                    
+                    const lastMonster = group.line[group.line.length - 1];
+                    if (megaItems[lastMonster]) {
+                        html += `<div class="mega-item-container"><div><img src="${BASE_URL}imagens/mega_evolution_items/${megaItems[lastMonster]}.webp"><div class="mega-item-label">Mega Item</div></div></div>`;
+                    }
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+            
+            display.innerHTML = html;
+            
+            document.querySelectorAll('.variant-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lineId = this.dataset.lineId;
+                    const variant = this.dataset.variant;
+                    const lineContainer = document.getElementById(lineId);
+                    lineContainer.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    lineContainer.querySelectorAll('.evo-stage-img').forEach(img => {
+                        const baseMonster = img.dataset.base;
+                        const type = img.dataset.type;
+                        const num = img.dataset.num;
+                        let newPath;
+                        if (variant === 'normal') {
+                            newPath = `${BASE_URL}imagens/anniversary_monsters/monster_${num}th/${type}_type_${num}th/${baseMonster}_th_${num}.webp`;
+                        } else {
+                            let modifiedName = baseMonster.includes('_solo') ? baseMonster.replace('_solo', `_solo_${variant}`) : baseMonster.replace(/(_\d+)$/, `_${variant}$1`);
+                            newPath = `${BASE_URL}imagens/anniversary_monsters/monster_${num}th/${type}_type_${num}th/${modifiedName}_th_${num}.webp`;
+                        }
+                        img.src = newPath;
+                    });
+                });
+            });
+        }
+
+        document.querySelectorAll('.anniversary-card').forEach(card => {
+            card.addEventListener('click', () => {
+                loadMonsters(parseInt(card.dataset.anniversary));
+                setTimeout(() => document.getElementById('monster-display').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+            });
+        });
+
+        document.getElementById('shiny-btn').addEventListener('click', () => {
+            isShiny = !isShiny;
+            const suffix = isShiny ? '_shyne' : '';
+            document.getElementById('main-monster-img').src = `${BASE_URL}imagens/monster_of_the_year/ventragon_04${suffix}_monster_year_2025.webp`;
+            const names = ['vingon_01', 'vindragon_02', 'vedragon_03', 'ventragon_04'];
+            document.querySelectorAll('.evo-img').forEach((img, i) => {
+                img.src = `${BASE_URL}imagens/monster_of_the_year/${names[i]}${suffix}_monster_year_2025.webp`;
+            });
+            document.getElementById('shiny-btn').textContent = isShiny ? '✨ Show Normal Version' : '✨ Toggle Shyne Version';
+        });
+    </script>
+</body>
+</html>
