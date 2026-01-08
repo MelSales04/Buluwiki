@@ -1,25 +1,546 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>BULWEEK – Monster Archive</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulu Monster Wiki</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            background: url('https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/loading_screen/loading_screen_background.webp') center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-monsters {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .loading-monsters img {
+            width: 150px;
+            height: 150px;
+            animation: bounce 1s infinite alternate;
+        }
+
+        .loading-monsters img:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-20px); }
+        }
+
+        .loading-text {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            height: 60px;
+        }
+
+        h1 {
+            font-size: 32px;
+            background: linear-gradient(90deg, #ffd700, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Tabs */
+        .tabs {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 107, 107, 0.2));
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 15px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .tab-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #ffd700, #ff6b6b);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Content */
+        .content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Anniversary Grid */
+        .anniversary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .anniversary-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            height: 200px;
+        }
+
+        .anniversary-card:hover {
+            transform: scale(1.05);
+            border-color: #ffd700;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.5);
+        }
+
+        .anniversary-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .anniversary-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Monster Display */
+        #monster-display {
+            margin-top: 30px;
+        }
+
+        .monster-type-section {
+            margin-bottom: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .type-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .type-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .type-name {
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .monsters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .monster-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .monster-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        }
+
+        .monster-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .monster-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        /* Monster of the Year */
+        .year-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .year-title {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .main-monster-card {
+            position: relative;
+            max-width: 600px;
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.3), rgba(255, 215, 0, 0.3));
+            border: 4px solid #ffd700;
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.6);
+        }
+
+        .main-monster-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, #ffd700, transparent, #ffd700);
+            border-radius: 30px;
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .main-monster-img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.8));
+        }
+
+        .evolution-line {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .evolution-card {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            width: 150px;
+        }
+
+        .evolution-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .evolution-name {
+            font-size: 14px;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .shiny-toggle {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #9b59b6, #e74c3c);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .shiny-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(155, 89, 182, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .anniversary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .monsters-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .year-title {
+                font-size: 32px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-monsters">
+            <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/loading_screen/loading_monster_01.webp" alt="Loading">
+            <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/loading_screen/loading_monster_02.webp" alt="Loading">
+        </div>
+        <div class="loading-text">LOADING...</div>
+    </div>
 
-<header class="top">
-  <img src="imagens/logos/bulu_monster_logo.png" class="logo">
-  <h1>Monster Anniversary Archive</h1>
-</header>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/logos/bulu_monster_logo.png" alt="Bulu Monster" class="logo">
+            <h1>Bulu Monster Wiki</h1>
+        </div>
+    </header>
 
-<section class="loading" id="loading">
-  <img src="imagens/loading_screen/loading_screen_background.webp" class="loading-bg">
-  <img src="imagens/loading_screen/loading_monster_01.webp" class="float a">
-  <img src="imagens/loading_screen/loading_monster_02.webp" class="float b">
-</section>
+    <!-- Tabs -->
+    <div class="tabs">
+        <button class="tab-button active" onclick="switchTab('anniversary')">🎂 Anniversary Monsters</button>
+        <button class="tab-button" onclick="switchTab('year')">🏆 Monster of the Year 2025</button>
+    </div>
 
-<main id="content"></main>
+    <!-- Content -->
+    <div class="content">
+        <!-- Anniversary Tab -->
+        <div id="anniversary-tab" class="tab-content active">
+            <div class="anniversary-grid">
+                <div class="anniversary-card" onclick="loadAnniversary(1)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/01th-anniversary.jpg" alt="1st Anniversary">
+                    <div class="anniversary-label">1st Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(2)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/02th-anniversary.jpg" alt="2nd Anniversary">
+                    <div class="anniversary-label">2nd Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(3)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/03th-anniversary.jpg" alt="3rd Anniversary">
+                    <div class="anniversary-label">3rd Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(4)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/04th-anniversary.jpg" alt="4th Anniversary">
+                    <div class="anniversary-label">4th Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(5)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/05th-anniversary.jpg" alt="5th Anniversary">
+                    <div class="anniversary-label">5th Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(6)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/06th-anniversary.jpg" alt="6th Anniversary">
+                    <div class="anniversary-label">6th Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(7)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/07th-anniversary.jpg" alt="7th Anniversary">
+                    <div class="anniversary-label">7th Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(8)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/08th-anniversary.jpg" alt="8th Anniversary">
+                    <div class="anniversary-label">8th Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(9)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/09th-anniversary.jpg" alt="9th Anniversary">
+                    <div class="anniversary-label">9th Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(10)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/10th-anniversary.jpg" alt="10th Anniversary">
+                    <div class="anniversary-label">10th Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(11)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/11th-anniversary.jpg" alt="11th Anniversary">
+                    <div class="anniversary-label">11th Anniversary</div>
+                </div>
+                <div class="anniversary-card" onclick="loadAnniversary(12)">
+                    <img src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/banner/12th-anniversary.jpg" alt="12th Anniversary">
+                    <div class="anniversary-label">12th Anniversary</div>
+                </div>
+            </div>
+            
+            <div id="monster-display"></div>
+        </div>
 
-<script src="script.js"></script>
-</body>
-</html>
+        <!-- Year Tab -->
+        <div id="year-tab" class="tab-content">
+            <div class="year-container">
+                <h2 class="year-title">The Best Monster of the Year 2025</h2>
+                
+                <div class="main-monster-card">
+                    <img id="main-monster-img" src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/monster_of_the_year/ventragon_04_monster_year_2025.webp" alt="Ventragon" class="main-monster-img">
+                </div>
+
+                <div class="evolution-line">
+                    <div class="evolution-card">
+                        <img id="evo1" src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/monster_of_the_year/vingon_01_monster_year_2025.webp" alt="Vingon">
+                        <div class="evolution-name">Vingon</div>
+                    </div>
+                    <div class="evolution-card">
+                        <img id="evo2" src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/monster_of_the_year/vindragon_02_monster_year_2025.webp" alt="Vindragon">
+                        <div class="evolution-name">Vindragon</div>
+                    </div>
+                    <div class="evolution-card">
+                        <img id="evo3" src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/monster_of_the_year/vedragon_03_monster_year_2025.webp" alt="Vedragon">
+                        <div class="evolution-name">Vedragon</div>
+                    </div>
+                    <div class="evolution-card">
+                        <img id="evo4" src="https://raw.githubusercontent.com/Melzyi/Buluwiki/main/imagens/monster_of_the_year/ventragon_04_monster_year_2025.webp" alt="Ventragon">
+                        <div class="evolution-name">Ventragon</div>
+                    </div>
+                </div>
+
+                <button class="shiny-toggle" onclick="toggleShiny()">✨ Toggle Shiny Version</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BASE_URL = 'https://raw.githubusercontent.com/Melzyi/Buluwiki/main/';
+        let isShiny = false;
+
+        // Monster data structure
+        const monsterData = {
+            1: {
+                common: ['fishy_01', 'ordinfishy_02', 'mystfishy_03'],
+                dragon: ['wyfishy_01', 'dritfishy_02', 'dragkfishy_03'],
+                earth: ['stonefishy_01', 'landfishy_02', 'gaiafishy_03'],
+                evil: ['evilfishy_01', 'devilfishy_02', 'mordefishy_03'],
+                fire: ['redfishy_01', 'flamefishy_02', 'blazingfishy_03'],
+                ice: ['icefishy_01', 'glacifishy_02', 'frozenfishy_03'],
+                lightning: ['elecfishy_01', 'lightfishy_02', 'thunderfishy_03'],
+                mythic: ['aciefishy_01', 'ancientfishy_02'],
+                spirit: ['telefishy_01', 'spiritfishy_02', 'psychicfishy_03', 'telefishy_natal_01', 'spiritfishy_natal_02', 'psychicfishy_natal_03', 'telefishy_shyne_01', 'spiritfishy_shyne_02', 'psychicfishy_shyne_03'],
+                water: ['waterfishy_01', 'oceanfishy_02', 'abyssfishy_03'],
+                wind: ['windifishy_01', 'breezefishy_02', 'stormfishy_03']
+            },
+            2: {
+                dragon: ['sigg_01', 'siggit_02', 'siggonit_03', 'siggdrak_04']
+            },
+            3: {
+                dragon: ['siggy_01', 'sigmot_02', 'sigmetit_03', 'siggement_04']
+            },
+            4: {
+                dragon: ['sigqua_01', 'sigquid_02', 'sigquigon_03', 'siggtaple_04']
+            },
+            5: {
+                common: ['punchant_01', 'boxant_02'],
+                dragon: ['daara_01', 'gararah_02', 'garajion_03'],
+                earth: ['earthdillo_01', 'gaiadillo_02'],
+                evil: ['soullent_01', 'ghoosent_02'],
+                fire: ['fireater_01', 'flameater_02', 'blazeater_03'],
+                ice: ['ragebea_01', 'terrobear_02'],
+                lightning: ['elecir_01', 'eleckuu_02', 'eleccuma_03'],
+                mythic: ['miracle_solo_sheep_04', 'miracle_solo_sheep_natal_04', 'miracle_solo_sheep_shyne_04'],
+                spirit: ['spirikett_01', 'psychokett_02', 'ancient_sheep_solo_02', 'ancient_sheep_solo_natal_02', 'ancient_sheep_solo_shyne_02'],
+                water: ['aquapole_01', 'aquatoad_02', 'clownfrog_03'],
+                wind: ['cutou_01', 'toucan_02']
+            },
+            6: {
+                dragon: ['hatchette_01', 'areochett_02', 'gaiachett_03', 'ultichett_04'],
+                evil: ['prison_breaker_solo_04', 'prison_breaker_solo_hyakki_yagyo_04', 
