@@ -412,6 +412,8 @@
     </div>
 
     <script>
+        console.log('JavaScript carregado! Site funcionando!');
+        
         const BASE_URL = 'https://raw.githubusercontent.com/Melzyi/Buluwiki/main/';
         let isShiny = false;
 
@@ -490,27 +492,25 @@
             }
         };
 
-        // Tab switching
-        document.getElementById('tab-anniversary').addEventListener('click', function() {
-            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-            document.getElementById('anniversary-tab').classList.add('active');
-        });
-
-        document.getElementById('tab-year').addEventListener('click', function() {
-            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            this.classList.add('active');
-            document.getElementById('year-tab').classList.add('active');
-        });
-
-        // Anniversary cards click
-        document.querySelectorAll('.anniversary-card').forEach(card => {
-            card.addEventListener('click', function() {
-                const num = parseInt(this.getAttribute('data-anniversary'));
-                loadMonsters(num);
-            });
-        });
-
-        
+        // FUNÇÃO PARA CARREGAR OS MONSTROS - ESSA É A QUE ESTAVA FALTANDO!
+        function loadMonsters(num) {
+            console.log('Carregando aniversário:', num);
+            const display = document.getElementById('monster-display');
+            const data = monsterData[num];
+            const numStr = num.toString().padStart(2, '0');
+            
+            let html = '';
+            
+            for (const [type, monsters] of Object.entries(data)) {
+                html += `
+                    <div class="monster-type-section">
+                        <div class="type-header">
+                            <img src="${BASE_URL}imagens/type_icon/${type}_type_icon.png" alt="${type}" class="type-icon">
+                            <div class="type-name">${type} Type</div>
+                        </div>
+                        <div class="monsters-grid">
+                `;
+                
+                monsters.forEach(monster => {
+                    const monsterName = monster.replace(/_/g, ' ');
+                    const imgPath = `${BASE_URL}imagens/anniversary_m
