@@ -492,25 +492,28 @@
             }
         };
 
-        // FUNÇÃO PARA CARREGAR OS MONSTROS - ESSA É A QUE ESTAVA FALTANDO!
+        // 1. Troca de Abas
+        const tabAnniversary = document.getElementById('tab-anniversary');
+        const tabYear = document.getElementById('tab-year');
+        const anniversaryContent = document.getElementById('anniversary-tab');
+        const yearContent = document.getElementById('year-tab');
+
+        tabAnniversary.addEventListener('click', () => {
+            tabAnniversary.classList.add('active');
+            tabYear.classList.remove('active');
+            anniversaryContent.classList.add('active');
+            yearContent.classList.remove('active');
+        });
+
+        tabYear.addEventListener('click', () => {
+            tabYear.classList.add('active');
+            tabAnniversary.classList.remove('active');
+            yearContent.classList.add('active');
+            anniversaryContent.classList.remove('active');
+        });
+
+        // 2. Carregar Monstros por Aniversário
         function loadMonsters(num) {
-            console.log('Carregando aniversário:', num);
             const display = document.getElementById('monster-display');
             const data = monsterData[num];
-            const numStr = num.toString().padStart(2, '0');
-            
-            let html = '';
-            
-            for (const [type, monsters] of Object.entries(data)) {
-                html += `
-                    <div class="monster-type-section">
-                        <div class="type-header">
-                            <img src="${BASE_URL}imagens/type_icon/${type}_type_icon.png" alt="${type}" class="type-icon">
-                            <div class="type-name">${type} Type</div>
-                        </div>
-                        <div class="monsters-grid">
-                `;
-                
-                monsters.forEach(monster => {
-                    const monsterName = monster.replace(/_/g, ' ');
-                    const imgPath = `${BASE_URL}imagens/anniversary_m
+            const numStr = num.to
