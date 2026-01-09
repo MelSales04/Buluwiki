@@ -508,7 +508,6 @@
             'siggdrak_04': 'siggdrak_evo_sigma_power_02_th',
             'siggement_04': 'siggement_evo_sigma_gem_03_th',
             'siggtaple_04': 'siggtaple_evo_sigma_elixir_04_th',
-            'garajion_03': 'giganion_evo_diamond_horn',
             'ultichett_04': 'ultichette_evo_rainbow_feather_06_th',
             'sigversith_04': 'sigversith_evo_versatile_core_07_th',
             'sigcobinith_04': 'sigcobinith_evo_sigma_controller_08_th',
@@ -524,9 +523,7 @@
             'morgicka_solo_04': 'morgicka_evo_spirit_essence_10_th',
             'aquamorph_solo_04': 'aquamorph_evo_water_essence_10_th',
             'cyclonph_solo_04': 'cyclonph_evo_wind_essence_10_th',
-            'terranir_04': 'terroria_evo_lunar_soil',
             'tempestnir_solo_04': 'tempestnir_evo_sigma_fusion_11_th',
-            'driftnir_04': 'tempestnir_evo_sigma_fusion_11_th',
             'skurvorr_04': 'skurvorr_evo_hellfire_bone_12_th',
             'duskvorr_04': 'duskvorr_evo_dusklight_bone_12_th',
             'umbrangler_solo_04': 'umbrangler_evo_leviathan_scale_12_th',
@@ -648,7 +645,7 @@
                     
                     html += '<div class="evolution-stages">';
                     group.line.forEach((monster, i) => {
-                        const isMega = monster.includes('_04') || (monster.includes('_03') && group.line.length === 3);
+                        const isMega = monster.includes('_04') || (monster.includes('_03') && group.line.length === 3) || (monster.includes('_02') && group.line.length === 2);
                         html += `<div class="evolution-stage"><img src="${BASE_URL}imagens/anniversary_monsters/monster_${numStr}th/${type}_type_${numStr}th/${monster}_th_${numStr}.webp" class="evo-stage-img ${isMega ? 'mega-evolution' : ''}" data-base="${monster}" data-type="${type}" data-num="${numStr}"><div class="evolution-stage-name">${formatMonsterName(monster.replace(/_solo/g, ''))}</div></div>`;
                         if (i < group.line.length - 1) html += '<div class="evolution-arrow">→</div>';
                     });
